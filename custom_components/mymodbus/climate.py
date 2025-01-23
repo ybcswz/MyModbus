@@ -218,11 +218,12 @@ class ClimateModbus():
         await self.hub.async_restart()
 
     def exception(self):
+        """
         turns = int(self.error / self.count)
         self.error += 1
         if turns != 0 and (turns > 6 and turns % 10):
             return
-        """if turns % 3 == 0:
+        if turns % 3 == 0:
             self.reset()"""
         from homeassistant.helpers.event import async_call_later
         async_call_later(self.hass, 1, self.reconnect)
