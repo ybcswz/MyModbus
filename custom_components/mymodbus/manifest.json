@@ -2,7 +2,7 @@
 	"domain": "mymodbus",
 	"name": "My ModBus Climate",
 	"documentation": "https://github.com/ybcswz/MyModbus",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"requirements": [],
 	"dependencies": ["modbus"],
 	"codeowners": ["@Yonsm"]
