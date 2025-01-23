@@ -1,7 +1,7 @@
 {
-	"domain": "zhimodbus",
-	"name": "Zhi ModBus Climate",
-	"documentation": "https://github.com/Yonsm/ZhiModBus",
+	"domain": "mymodbus",
+	"name": "My ModBus Climate",
+	"documentation": "https://github.com/ybcswz/MyModbus",
 	"version": "1.0.1",
 	"requirements": [],
 	"dependencies": ["modbus"],
