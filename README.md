@@ -19,7 +19,7 @@ modbus:
   port: 8899
 
 climate:
-  - platform: zhimodbus
+  - platform: mymodbus
     name: [餐厅空调, 客厅空调, 主卧空调, 儿童房空调]
     fan_mode: { registers: [6, 10, 14, 18] }
     fan_modes: { 自动: 0, 一档: 1, 二档: 2, 三档: 3, 四档: 4, 五档: 5 }
@@ -32,7 +32,7 @@ climate:
 
 ```yaml
 climate:
-  - platform: zhimodbus
+  - platform: mymodbus
     hub: ModBus,
     name: [Daikin1, Daikin2, Daikin3, Daikin4],
 
