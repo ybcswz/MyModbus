@@ -46,6 +46,7 @@ REG_HUMIDITY = 'humidity'
 REG_HVAC_MODE = 'hvac_mode'
 REG_HVAC_MODE_SET = 'hvac_mode_set'
 REG_HVAC_ON_OFF = 'hvac_onoff'
+REG_HVAC_ON_OFF_SET = 'hvac_onoff_set'
 REG_PRESET_MODE = 'preset_mode'
 REG_SWING_MODE = 'swing_mode'
 REG_TARGET_HUMIDITY = 'target_humidity'
@@ -103,13 +104,17 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 
     vol.Optional(REG_AUX_HEAT): dict,
     vol.Optional(REG_FAN_MODE): dict,
+    vol.Optional(REG_FAN_MODE_SET): dict,
     vol.Optional(REG_HUMIDITY): dict,
     vol.Optional(REG_HVAC_MODE): dict,
+    vol.Optional(REG_HVAC_MODE_SET): dict,
     vol.Optional(REG_HVAC_ON_OFF): dict,
+    vol.Optional(REG_HVAC_ON_OFF_SET): dict,
     vol.Optional(REG_PRESET_MODE): dict,
     vol.Optional(REG_SWING_MODE): dict,
     vol.Optional(REG_TARGET_HUMIDITY): dict,
     vol.Optional(REG_TARGET_TEMPERATURE): dict,
+    vol.Optional(REG_TARGET_TEMPERATURE_SET): dict,
     vol.Optional(REG_TEMPERATURE): dict,
 })
 
@@ -270,7 +275,7 @@ class MyModbusClimate(ClimateEntity):
         self._name = name
         self._index = index
         self._values = {}
-        #self._last_on_operation = None
+        self._last_on_operation = None
         self._skip_update = False
         features = ClimateEntityFeature.TURN_ON | ClimateEntityFeature.TURN_OFF
         for prop in self._bus.regs:
@@ -324,15 +329,12 @@ class MyModbusClimate(ClimateEntity):
 
     @property
     def hvac_mode(self):
-        """
         if REG_HVAC_ON_OFF in self._bus.regs:
             if self.get_value(REG_HVAC_ON_OFF) == self._bus.hvac_off_value:
                 return HVACMode.OFF
         hvac_mode = self.get_mode(self._bus.hvac_modes, REG_HVAC_MODE) or HVACMode.OFF
         if hvac_mode != HVACMode.OFF:
             self._last_on_operation = hvac_mode
-        """
-        hvac_mode = self.get_mode(self._bus.hvac_modes, REG_HVAC_MODE)
         return hvac_mode
 
     @property
@@ -391,9 +393,8 @@ class MyModbusClimate(ClimateEntity):
 
     async def async_set_hvac_mode(self, hvac_mode):
         """Set new hvac mode."""
-        """
-        if REG_HVAC_OFF in self._bus.regs:
-            await self.set_value(REG_HVAC_OFF, self._bus.hvac_off_value if hvac_mode == HVACMode.OFF else self._bus.hvac_on_value)
+        if REG_HVAC_ON_OFF in self._bus.regs:
+            await self.set_value(REG_HVAC_ON_OFF_SET, self._bus.hvac_off_value if hvac_mode == HVACMode.OFF else self._bus.hvac_on_value)
             if hvac_mode == HVACMode.OFF:
                 return
 
@@ -404,8 +405,7 @@ class MyModbusClimate(ClimateEntity):
             # current = self.current_temperature
             # target = self.target_temperature
             # hvac_mode = HVACMode.HEAT if current and target and current < target else HVACMode.COOL
-        """
-        _LOGGER.debug("Set hvac mode: %s", hvac_mode)
+
         await self.set_mode(self._bus.hvac_modes, REG_HVAC_MODE_SET, hvac_mode)
 
     @property
@@ -418,14 +418,12 @@ class MyModbusClimate(ClimateEntity):
     async def async_turn_on(self):
         """Turn on."""
         _LOGGER.debug("Turn on")
-        #await self.async_set_hvac_mode(self._last_on_operation or self.best_hvac_mode)
-        await self.set_value(REG_HVAC_ON_OFF, self._bus.hvac_on_value)
+        await self.async_set_hvac_mode(self._last_on_operation or self.best_hvac_mode)
 
     async def async_turn_off(self):
         """Turn off."""
         _LOGGER.debug("Turn off")
-        #await self.async_set_hvac_mode(HVACMode.OFF)
-        await self.set_value(REG_HVAC_ON_OFF, self._bus.hvac_off_value)
+        await self.async_set_hvac_mode(HVACMode.OFF)
 
     async def async_set_fan_mode(self, fan_mode):
         """Set new fan mode."""
