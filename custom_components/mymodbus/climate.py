@@ -405,8 +405,8 @@ class MyModbusClimate(ClimateEntity):
             # current = self.current_temperature
             # target = self.target_temperature
             # hvac_mode = HVACMode.HEAT if current and target and current < target else HVACMode.COOL
-
-        await self.set_mode(self._bus.hvac_modes, REG_HVAC_MODE_SET, hvac_mode)
+        if hvac_mode is not None:
+            await self.set_mode(self._bus.hvac_modes, REG_HVAC_MODE_SET, hvac_mode)
 
     @property
     def best_hvac_mode(self):
