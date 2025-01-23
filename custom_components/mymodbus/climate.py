@@ -65,14 +65,18 @@ DATA_TYPE_CUSTOM = 'custom'
 
 SUPPORTED_FEATURES = {
     REG_AUX_HEAT: ClimateEntityFeature.AUX_HEAT,
-    REG_FAN_MODE: ClimateEntityFeature.FAN_MODE,
+    REG_FAN_MODE_SET: ClimateEntityFeature.FAN_MODE,
+    REG_FAN_MODE: 0,
     REG_HUMIDITY: 0,
-    REG_HVAC_MODE: ClimateEntityFeature.TURN_ON,
-    REG_HVAC_ON_OFF: ClimateEntityFeature.TURN_OFF,
+    REG_HVAC_MODE: 0,
+    REG_HVAC_MODE_SET: ClimateEntityFeature.TURN_ON,
+    REG_HVAC_ON_OFF_SET: ClimateEntityFeature.TURN_OFF,
+    REG_HVAC_ON_OFF: 0,
     REG_PRESET_MODE: ClimateEntityFeature.PRESET_MODE,
     REG_SWING_MODE: ClimateEntityFeature.SWING_MODE,
     REG_TARGET_HUMIDITY: ClimateEntityFeature.TARGET_HUMIDITY,
-    REG_TARGET_TEMPERATURE: ClimateEntityFeature.TARGET_TEMPERATURE,
+    REG_TARGET_TEMPERATURE_SET: ClimateEntityFeature.TARGET_TEMPERATURE,
+    REG_TARGET_TEMPERATURE: 0,
     REG_TEMPERATURE: 0,
 }
 
