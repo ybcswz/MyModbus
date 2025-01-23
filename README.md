@@ -22,22 +22,18 @@ modbus:
     port: 502
     message_wait_milliseconds: 500
 
-    climates:
-      - platform: mymodbus
-        hub: Hitachi
-        name: [Room1, Room2, Room3, Room4, Room5]
-        hvac_onoff: { registers: [40078, 40169, 40260, 40351, 40442] }
-        hvac_mode: { registers: [40029, 40120, 40211, 40302, 40393] }
-        hvac_mode_set: { registers: [40079, 40170, 40261, 40352, 40443] }
-        hvac_modes: { auto: 1, cool: 2, dry: 4, fan_only: 8, heat: 10 }
-        fan_mode: { registers: [40030, 40121, 40212, 40303, 40394] }
-        fan_mode_set: { registers: [40080, 40171, 40262, 40353, 40444] }
-        fan_modes: { 自动: 0, 高风: 2, 中风: 4, 低风: 8 }
-        target_temperature: { registers: [40031, 40122, 40213, 40304, 40395] }
-        target_temperature_set: { registers: [40081, 40172, 40263, 40354, 40445] }
-        temperature: { registers: [40039, 40130, 40221, 40312, 40403] }
-        temp_step: 1
-        max_temp: 30
-        min_temp: 19
-```
-
+climate:
+  - platform: mymodbus
+    hub: Hitachi
+    name: ["客厅空调", "我屋空调", "餐厅空调", "妞屋空调", "胖屋空调"]
+    hvac_onoff: { registers: [40028, 40119, 40210, 40301, 40392] }
+    hvac_onoff_set: { registers: [40078, 40169, 40260, 40351, 40442] }
+    hvac_mode: { registers: [40029, 40120, 40211, 40302, 40393] }
+    hvac_mode_set: { registers: [40079, 40170, 40261, 40352, 40443] }
+    hvac_modes: { auto: 1, cool: 2, dry: 4, fan_only: 8, heat: 10 }
+    fan_mode: { registers: [40030, 40121, 40212, 40303, 40394] }
+    fan_mode_set: { registers: [40080, 40171, 40262, 40353, 40444] }
+    fan_modes: { 自动: 0, 高风: 2, 中风: 4, 低风: 8 }
+    target_temperature: { registers: [40031, 40122, 40213, 40304, 40395] }
+    target_temperature_set: { registers: [40081, 40172, 40263, 40354, 40445] }
+    temperature: { registers: [40039, 40130, 40221, 40312, 40403] }
