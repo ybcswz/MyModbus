@@ -25,7 +25,7 @@ modbus:
 climate:
   - platform: mymodbus
     hub: Hitachi
-    name: ["客厅空调", "我屋空调", "餐厅空调", "妞屋空调", "胖屋空调"]
+    name: ["客厅空调", "我屋空调", "餐厅空调", "儿童房空调", "室友空调"]
     hvac_onoff: { registers: [40028, 40119, 40210, 40301, 40392] }
     hvac_onoff_set: { registers: [40078, 40169, 40260, 40351, 40442] }
     hvac_mode: { registers: [40029, 40120, 40211, 40302, 40393] }
