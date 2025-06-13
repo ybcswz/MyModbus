@@ -64,7 +64,6 @@ DATA_TYPE_FLOAT = 'float'
 DATA_TYPE_CUSTOM = 'custom'
 
 SUPPORTED_FEATURES = {
-    REG_AUX_HEAT: ClimateEntityFeature.AUX_HEAT,
     REG_FAN_MODE_SET: ClimateEntityFeature.FAN_MODE,
     REG_FAN_MODE: 0,
     REG_HUMIDITY: 0,
